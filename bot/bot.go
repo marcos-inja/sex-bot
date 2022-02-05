@@ -2,10 +2,13 @@ package bot
 
 import (
 	"discord-bot-golang/config"
+	"encoding/json"
 	"fmt"
-	"github.com/bwmarrin/discordgo"
+	"io/ioutil"
 	"math/rand"
 	"strings"
+
+	"github.com/bwmarrin/discordgo"
 )
 
 var BotId string
@@ -29,6 +32,7 @@ func Start() {
 	BotId = u.ID
 
 	goBot.AddHandler(messageHandler)
+	goBot.AddHandler(jokeResp)
 
 	err = goBot.Open()
 
@@ -40,7 +44,7 @@ func Start() {
 }
 
 func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
-	sex_messages := []string{
+	sex_messages := [7]string{
 		"Referência",
 		"Isso é uma clara referência a sexo",
 		"Estão falando de sexo!? 👀",
@@ -58,5 +62,21 @@ func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	if have_sexo {
 		_, _ = s.ChannelMessageSend(m.ChannelID, sex_messages[rand.Intn(7)])
+	}
+}
+
+func jokeResp(s *discordgo.Session, m *discordgo.MessageCreate) {
+
+	file, err := ioutil.ReadFile("./jokes/jokes.json")
+
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	var arr []string
+	json.Unmarshal([]byte(file), &arr)
+	
+	if m.Content == config.BotPrefix + "piada"{
+		length_arr := len(arr)
+		_, _ = s.ChannelMessageSend(m.ChannelID, arr[rand.Intn(length_arr)])
 	}
 }
