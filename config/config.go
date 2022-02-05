@@ -1,43 +1,27 @@
 package config
 
 import (
-	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"os"
+	"github.com/joho/godotenv"
 )
 
 var (
 	Token     string
 	BotPrefix string
-
-	config *configStruct
 )
 
-type configStruct struct {
-	Token     string `json : "Token"`
-	BotPrefix string `json : "BotPrefix"`
-}
-
 func ReadConfig() error {
-	fmt.Println("Reading config file...")
-	file, err := ioutil.ReadFile("./config.json")
-
+	err := godotenv.Load()
 	if err != nil {
-		fmt.Println(err.Error())
-		return err
+		fmt.Println(err)
 	}
 
-	fmt.Println(string(file))
+	token := os.Getenv("TOKEN")
+	prefix := os.Getenv("PREFIX")
 
-	err = json.Unmarshal(file, &config)
-
-	if err != nil {
-		fmt.Println(err.Error())
-		return err
-	}
-	Token = config.Token
-	BotPrefix = config.BotPrefix
+	Token = token
+	BotPrefix = prefix
 
 	return nil
-
 }
