@@ -1,3 +1,2 @@
 # Sex Bot
-
-O bot do sexo, feito com golang!
+The sex bot, made with golang!
