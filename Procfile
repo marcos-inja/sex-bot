@@ -1,1 +1,1 @@
-worker: ./discord-bot-golang
+worker: discord-bot-golang
