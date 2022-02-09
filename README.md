@@ -1,4 +1,4 @@
-# Sex Bot
+<h1 align="center">Sex Bot</h1>
 <img align="right" width="400" src="https://user-images.githubusercontent.com/76446913/152648528-08045a31-9ec0-4637-bfa3-b07c054ce7ea.jpg" />
 
 The sex bot, made with golang!
