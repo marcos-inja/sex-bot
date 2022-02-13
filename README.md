@@ -9,4 +9,4 @@ Add the sex bot to your discord server! clicking [**here**](https://discord.com/
 
 ## How to use
 - Use `!piada` to tell a random joke
-- He answers the word "sexo", with some random phrase
+- He answers the word "sexo", with some random indecent phrase
