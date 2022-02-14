@@ -33,6 +33,7 @@ func Start() {
 
 	goBot.AddHandler(messageHandler)
 	goBot.AddHandler(jokeResp)
+	goBot.AddHandler(setPresence)
 
 	err = goBot.Open()
 
@@ -43,8 +44,12 @@ func Start() {
 	fmt.Println("Running...")
 }
 
+func setPresence(s *discordgo.Session, event *discordgo.Ready) {
+	s.UpdateGameStatus(0,"videos no xvideos!")
+}
+
 func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
-	sex_messages := [7]string{
+	sex_messages := [8]string{
 		"Referência",
 		"Isso é uma clara referência a sexo",
 		"Estão falando de sexo!? 👀",
@@ -52,6 +57,7 @@ func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 		"Mas o que é isso? Sexo acidental!",
 		"Apenas ocasional sem proteção",
 		"Eita porra, tão falando de sexo!",
+		"Acho que isso é uma referência a sexo",
 	}
 	if m.Author.ID == BotId {
 		return
@@ -61,7 +67,7 @@ func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 	have_sexo := strings.Contains(content_message, "sexo")
 
 	if have_sexo {
-		_, _ = s.ChannelMessageSend(m.ChannelID, sex_messages[rand.Intn(7)])
+		_, _ = s.ChannelMessageSend(m.ChannelID, sex_messages[rand.Intn(8)])
 	}
 }
 
